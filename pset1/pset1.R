@@ -49,28 +49,30 @@ class(ad) # which prints class
 
 # Get a sense of the data by checking the names of each of the variables,
 # looking at the dimensions, and
-
+names(ad) # for name of each variable
+dim(ad) # for [row, col] nums
 
 # What are the dimensions of the data?
-
+# 3140   23
 
 # Take a look at the first lines
-
+head(ad, n=1)
 
 # How many unique countries in this dataset
-
+uniq_cnty_num <- length(unique(ad$Country)) # which returns 157
 
 # Make a subset of data for all observations for Mexico
-
+mexico <- ad[ad$Country == "Mexico", ]
 
 # What is the max number of antidumping cases that Mexico has recorded in this data?
-
+max_ad_num_mexico <- max(mexico$AD)
 
 # In what year(s) did Mexico have this max value of antidumping cases? Select the rows
 # of this subset of data
-
+max_ad_years_mexico <- mexico$Year[mexico$AD == max(mexico$AD)]
 
 # What is the average gdp per capita that Mexico recorded during this period?
-
+mexico_gdppc_max_ad_years <- mean(mexico$gdppc[mexico$Year %in% max_ad_years_mexico])
 
 # Order the mexican data by the value of their GDP per capita, but make it decreasing
+gdppc_mexico_desc <- mexico[order(mexico$gdppc, decreasing=TRUE), ]
