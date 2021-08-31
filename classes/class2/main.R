@@ -91,16 +91,15 @@ par(mfrow = c(2,2)) # first create coordinate-wise location
 cyls = c(4, 6, 8, 10)
 cols = c("red", "blue", "green", "black")
 
-for (item in Map(list, cyls, cols)) {
-  print(item[1])
-}
+myenv <- new.env()
+zip_df <- data.frame(cylinder=cyls, colors = cols, stringsAsFactors=F)
 
-for (item in Map(list, cyls, cols)) {
-  print(item[1], item[2])
-  print(typeof(item[1]), item[2])
 
+for (i in 1:nrow(zip_df)){
+
+  myenv[[zip_df[i, 'cylinder']]] <- zip_df[i, 'colors']
   plot(
-  x=mtcars$mpg[mtcars$cyl==item[1]], y = mtcars$disp[mtcars$cyl==item[1]], type="p",
+  x=mtcars$mpg[mtcars$cyl==item[i]], y = mtcars$disp[mtcars$cyl==item[1]], type="p",
   xlab="Consumption",
   ylab="Displacement",
   main="MTCARS", # title for the plot
@@ -111,9 +110,7 @@ for (item in Map(list, cyls, cols)) {
 )
 }
 
-graphics.off(
-
-)
+graphics.off()
 
 
 ## Histogram
@@ -138,4 +135,44 @@ lines()
 segments()
 
 # GGPLOTs
+# install.packages("ggplot2")
+library(ggplot2)
 
+ggplot(data=mtcars, aes(x=mpg, y=disp)) + geom_point() # layers
+?geom_point # geometric point it refers to
+
+ggplot(data=mtcars, aes(x=mpg, y=disp, col=hp)) + geom_point()
+
+ggplot(data=mtcars, aes(x=mpg, y=disp, col=as.factor(cyl))) + geom_point() # discrete version of color histogram
+ggplot(data=mtcars, aes(x=mpg, y=disp, col=cyl)) + geom_point() # continuous version of color histogram
+ggplot(data=mtcars, aes(x=mpg, y=disp, size=hp, col=as.factor(cyl))) + geom_point()
+
+
+ggplot(data=mtcars, aes(x=mpg, y=disp, col=hp)) + geom_point() + geom_smooth()
+
+ggplot(data=mtcars, aes(x=mpg, y=disp, col=hp)) + geom_point() + geom_smooth(method = lm, se=TRUE)
+
+ggplot(data=mtcars, aes(x=mpg, y=disp, col=as.factor(cyl))) + geom_point() + geom_smooth(method = lm, se=FALSE)
+
+ggplot(data=mtcars, aes(x=mpg, y=disp, col=as.factor(cyl))) + geom_point() + geom_smooth(method = lm, se=FALSE) + facet_wrap(~cyl)
+
+ggplot(data=mtcars, aes(x=mpg, y=disp, col=as.factor(cyl))) + geom_point() +  ggtitle("MTCARS") + xlab("Consumption") + ylab("Displacement")
+
+plot <- ggplot(data=mtcars, aes(x=mpg, y=disp, col=as.factor(cyl))) + geom_point() +  ggtitle("MTCARS") + xlab("Consumption") + ylab("Displacement") + xlim(0, 35) + ylim(0, 500)
+
+plot1 <- plot + labs(col="Cyl")
+
+plot_white <- plot + theme_minimal() # white backgorund plot
+
+install.packages("ggthemes")
+
+library(ggthemes)
+
+plot1 + theme_economist() + scale_colour_economist()
+
+ggplot(data=mtcars, aes(x=disp)) + geom_histogram(binwidth=40)
+
+ggplot(data=mtcars, aes(x=disp)) + geom_density()
+
+data(mtcars)
+ggplot(data=mtcars, aes(x=as.factor(cyl), y=disp)) + geom_boxplot() + xlab("Cylinder") + ylab("Displacement")
