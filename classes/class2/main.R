@@ -67,9 +67,17 @@ plot(
   ylim = c(0,500),
   xlim = c(0,35),
   col="red", # rainbow(10) -- way more colorful~
-  pch=10 # refer to website for what symbol each integer match to
+  pch=10 # refer to http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r for what symbol each integer match to
 )
 
 #### add points to the current plot
-points(x=mtcars$mpg[mtcars$cyl==6], y = mtcars$disp[mtcars$cyl==6], col="pink", pch=15)
-points(x=mtcars$mpg[mtcars$cyl==8], y = mtcars$disp[mtcars$cyl==8], col="green", pch=12)
+points(x=mtcars$mpg[mtcars$cyl==6], y = mtcars$disp[mtcars$cyl==6], col="pink", pch=6)
+points(x=mtcars$mpg[mtcars$cyl==8], y = mtcars$disp[mtcars$cyl==8], col="green", pch=8)
+
+legend(
+  "topleft", legend=c(4, 6, 8), col=c("red", "blue", "darkgreen"),
+   pch=c(4, 6, 8), # no legend box lines around if "n"
+   bty="n",
+   inset=0.05 # indent legend box a bit into the center of the plot
+)
+
