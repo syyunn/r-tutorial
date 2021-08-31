@@ -176,3 +176,4 @@ ggplot(data=mtcars, aes(x=disp)) + geom_density()
 
 data(mtcars)
 ggplot(data=mtcars, aes(x=as.factor(cyl), y=disp)) + geom_boxplot() + xlab("Cylinder") + ylab("Displacement")
+
