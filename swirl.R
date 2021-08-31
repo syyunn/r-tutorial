@@ -1,3 +1,3 @@
-# install.packages("swirl") # already-installed
+install.packages("swirl") # already-installed
 library("swirl")
-swirl()
+swirl
