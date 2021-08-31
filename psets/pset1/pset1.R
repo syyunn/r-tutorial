@@ -46,7 +46,7 @@ expect_equal(imax(vector1, n=2), 13)
 ## there's no other packages I will use in the pset
 
 # Get your data: load the dataset "antidumping.csv" using read.csv()
-ad <- read.csv('./antidumping.csv', row.names=1) # row.names=1 uses the first column as index column
+ad <- read.csv('antidumping.csv', row.names=1) # row.names=1 uses the first column as index column
 
 # What kind of object is your dataset?
 class(ad) # which prints "data.frame"
