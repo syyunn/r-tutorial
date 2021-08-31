@@ -39,7 +39,8 @@ plot(
   xlab="Year",
   ylab="Polyarchy",
   ylim = c(0,1),
-  main="Democracy Level"
+  main="Democracy Level",
+  col='red'
   # xlim = c(0,2000),
 )
 par(new=TRUE)
@@ -50,7 +51,8 @@ plot(
   xlab="Year",
   ylab="Polyarchy",
   ylim = c(0,1),
-  main="Democracy Level"
+  main="Democracy Level",
+  col='blue'
   # xlim = c(0,2000),
 )
 legend(
