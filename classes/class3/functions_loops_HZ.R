@@ -16,7 +16,9 @@ module2 <- function(x){
 
 # Function to check if number is odd
 even_or_odd <- function(x){
-  ifelse(x %% 2 == 0, "Even", "Odd")
+  k <- round(x, digits = 0)
+  diff <- abs(x - k)
+  ifelse(diff > 0, "Decimal", ifelse(x %% 2 == 0, "Even", "Odd"))
 }
 
 even_or_odd(5.5)
@@ -46,6 +48,19 @@ sin_exp <- function(x){
 ggplot(data.frame(x = c(-10, 10)), aes(x)) + 
   stat_function(fun = sin_exp)+
   theme_classic()
+
+### my half-circle #######################
+circle <- function(x, r=1){
+  # r refers to radius
+  y_pos = sqrt(r^2 - x^2)
+  # y_neg = -sqrt(r**2 - x**2)
+  return(y_pos)
+}
+
+ggplot(data.frame(x = c(-1, 1)), aes(x)) +
+  stat_function(fun = circle)+
+  theme_classic()
+##########################################
 
 # Let's write a function for the circle
 circle <- function(R){
@@ -92,7 +107,8 @@ for (i in 1:n){
 #### we could write a loop that gets closer to this actual algorithm 
 
 #### first, lets sketch out the loop we need to make 
-############ LOOP SKETCH! 
+############ LOOP SKETCH!
+
 
 #### Start with the concept
 ## first, start with a and b equal to one
@@ -122,7 +138,7 @@ print(fibonacci)
 ########### simualtions are useful when problems are hard analytically! 
 
 ########### First, we'll do a very easy coin flip problem
-sims <- 10000
+sims <- 100000000
 heads <- c()
 
 set.seed(124)
@@ -131,6 +147,20 @@ for (i in 1:sims){
   heads[i]<- sample(c("Head", "Tails"), 1)
 }
 sum(heads == "Head")/length(heads)
+
+
+### Simulations: 6-sided rool a dice twice sum the 2 numbers
+sims <- 1000000
+result <- c()
+
+set.seed(02139)
+
+for (i in 1:sims){
+  result[i] = sum(sample(1:6, size = 2, replace = FALSE)) # replace = True, duplicated numbers, such as 1, 1 doesn't appear
+  print(result[i])
+}
+
+print(length(which(result==7))/sims)
 
 ########### Lets play the roulette 1000 times, always betting for the number 7
 
@@ -173,16 +203,21 @@ while(x < 100){
 
 ## Analytically this is dumb but we will have harder problems in the quant sequence
 
+
+
+
+
 ## We can make while search for the value we want
 x <- 0
 y <- 1
 
-while(module(y) > 0.01){
-  x <- runif(1, min = -10, max = 10)
+while(abs(y) > 0.001){
+  x <- runif(1, min = 0, max = 0.8)
   y <- 5*(x)^3 - 2
-  if(module(y) <= 0.01){
+  if(abs(y) <= 0.001){
     print(x)}
 }
+
 (2/5)^(1/3)
 
 
