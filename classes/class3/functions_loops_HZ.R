@@ -3,7 +3,7 @@
 # Module function
 module <- function(x){
   sqrt(x^2)
-}
+} ## return absolute value |x|
 
 # Or also:
 module2 <- function(x){
