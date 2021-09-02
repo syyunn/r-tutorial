@@ -4,8 +4,7 @@ setwd("/Users/syyun/r-tutorial/classes/class4")
 ########## MATRIX ALGEBRA #########################
 ###################################################
 # Create some matrices
-A <- matrix(c(1, 4, 5, 6, 9, 12, 4, 1, 9),
-            nrow = 3, ncol = 3, byrow = T)
+A <- matrix(c(1, 4, 5, 6, 9, 12, 4, 1, 9), nrow = 3, ncol = 3, byrow = T)
 
 # you can also create a matrix by binding together vectors
 B <- cbind(c(1, 9, 2), c(2, 3, 2), c(8, 8, 0))
@@ -13,6 +12,7 @@ C <- rbind(c(8, 9, 10), c(4, 7, 9))
 
 D <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), nrow = 3, ncol = 3, byrow = T)
 D <- matrix(1:9, nrow = 3, ncol = 3, byrow = T)
+D <- matrix(1:9, nrow = 3, ncol = 3, byrow = F)
 
 # Return the first row of A
 A[1, ]
@@ -70,12 +70,14 @@ A %*% C
 t(C) %*% A
 
 # Create a vector of length 3
-V <- c(7, 9, 10)
+V <- c(7, 9, 10) # r contains vector "vertically"
 class(V)
 
 # Try to multiply it by a 3x3 matrix. Does it work?
 V %*% C
-C %*% V 
+
+C %*% V
+dim(C)
 
 # What does this tell you about how R stores vectors?
 
@@ -94,12 +96,7 @@ solve(D)
 ## 4 9 8 ##
 ## 9 4 5 ##
 ###########
-
-
-
-
-
-
+Q <- rbind(c(1, 6, 7), c(4, 9, 8), c(9, 4, 5))
 
 Q <- matrix(c(1, 6, 7, 4, 9, 8, 9, 4, 5),
             nrow = 3,
@@ -109,7 +106,9 @@ Q <- matrix(c(1, 6, 7, 4, 9, 8, 9, 4, 5),
 # solve the following using matrix operations
 
 # Q'Q
-t(Q) %*% Q
+Q_TQ <- t(Q) %*% Q
+
+solve(Q_TQ)
 
 # (Q'Q)^-1
 solve(t(Q) %*% Q)
@@ -126,7 +125,12 @@ solve(t(Q) %*% Q) %*% t(Q) %*% (2*C)
 # Create a matrix to represent the values on the left side
 X <- matrix(c(3, 2, 1, 6), nrow = 2, ncol = 2, byrow = T)
 
-X
+class(V)
+typeof(V)
+
+class(X)
+
+typeof(X)
 
 ## On your own
 # Create a matrix Y to represent the outcomes
